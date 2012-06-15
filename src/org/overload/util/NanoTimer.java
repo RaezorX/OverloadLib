@@ -6,7 +6,6 @@ package org.overload.util;
  * @author Odell
  */
 public class NanoTimer {
-	
 	private Long start = null, target = null, pause = null;
 	
 	private NanoTimer() {
