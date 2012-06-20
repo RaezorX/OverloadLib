@@ -36,6 +36,8 @@ public class NanoTimer {
 	 */
 	public void reset() {
 		start = System.nanoTime();
+		if (isPaused())
+			pause = start;
 	}
 	
 	/**
@@ -61,7 +63,7 @@ public class NanoTimer {
 	 * @return the count of nanoseconds that have elapsed since the timer start or a reset.
 	 */
 	public long getElapsedNanos() {
-		return System.nanoTime() - start;
+		return (isPaused() ? pause : System.nanoTime()) - start;
 	}
 	
 	/**
