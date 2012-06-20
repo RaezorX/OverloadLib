@@ -6,8 +6,16 @@ import org.overload.algo.Flags;
 import org.overload.loc.Locatable;
 import org.overload.loc.Node;
 
+/**
+ * 3D raster-based flood fill algorithm collection.
+ * @author Odell
+ */
 public class Floodfill3D {
 	
+	/**
+	 * Algorithm set for this raster-based flood fill collection.
+	 * @author Odell
+	 */
 	public enum Algorithm {
 		
 		QUEUE_4, 
@@ -15,6 +23,9 @@ public class Floodfill3D {
 		LINEAR_4, 
 		LINEAR_8;
 		
+		/**
+		 * @return a simple description of this algorithm.
+		 */
 		public String getDescription() {
 			return toString();
 		}
@@ -49,6 +60,11 @@ public class Floodfill3D {
 	
 	private Flags<Locatable> flags = null;
 	
+	/**
+	 * Creates a flood fill provider given an algorithm type.
+	 * @param alg
+	 * 		the algorithm implementation to use.
+	 */
 	public Floodfill3D(final Algorithm alg) {
 		this.algorithm = alg;
 		switch (algorithm) {
@@ -69,15 +85,30 @@ public class Floodfill3D {
 		}
 	}
 	
+	/**
+	 * Creates a flood fill provider given an algorithm type and collision flags.
+	 * @param alg
+	 * 		the algorithm implementation to use.
+	 * @param flags
+	 * 		the collision flags for hit detection.
+	 */
 	public Floodfill3D(final Algorithm alg, final Flags<Locatable> flags) {
 		this(alg);
 		setFlags(flags);
 	}
 	
+	/**
+	 * @return the algorithm of this flood fill.
+	 */
 	public final Algorithm getAlgorithm() {
 		return algorithm;
 	}
 	
+	/**
+	 * Assigns the collision flags of this flood fill.
+	 * @param flags
+	 * 		the collision flags for the algorithm implementation.
+	 */
 	public final void setFlags(final Flags<Locatable> flags) {
 		this.flags = flags;
 	}

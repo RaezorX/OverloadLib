@@ -1,26 +1,58 @@
 package org.overload.loc;
 
+/**
+ * A class based wrapper for the Locatable interface.
+ * @author Odell
+ */
 public class Node implements Locatable {
 
 	protected int x, y;
 	
+	/**
+	 * Creates a new Node object with the given x,y coordinates.
+	 * @param x
+	 * 		the X position of this Node.
+	 * @param y
+	 * 		the Y position of this Node.
+	 */
 	public Node(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * Creates a new Node object by cloning the given Locatable.
+	 * @param loc
+	 * 		the Locatable to use to create this Node.
+	 */
 	public Node(final Locatable loc) {
 		this(loc.getX(), loc.getY());
 	}
 	
+	/**
+	 * Modifies the internal x,y positions of this Node.
+	 * @param x
+	 * 		the value to shift the X position of this Node.
+	 * @param y
+	 * 		the value to shift the Y position of this Node.
+	 * @return this Node.
+	 */
 	public Node shift(final int x, final int y) {
 		this.x += x;
 		this.y += y;
 		return this;
 	}
 	
+	/**
+	 * Creates a copy of this Node shifted by the given values.
+	 * @param x
+	 * 		the value to shift the X position of this Node.
+	 * @param y
+	 * 		the value to shift the Y position of this Node.
+	 * @return a copy of this Node shifted.
+	 */
 	public Node derive(final int x, final int y) {
-		return new Node(getX() + x, getY() + y);
+		return clone().shift(x, y);
 	}
 	
 	@Override
@@ -33,10 +65,20 @@ public class Node implements Locatable {
 		return y;
 	}
 	
+	/**
+	 * Sets the X position of this Node.
+	 * @param x
+	 * 		the new X position of this Node.
+	 */
 	public void setX(final int x) {
 		this.x = x;
 	}
 	
+	/**
+	 * Sets the Y position of this Node.
+	 * @param y
+	 * 		the new Y position of this Node.
+	 */
 	public void setY(final int y) {
 		this.y = y;
 	}
@@ -61,27 +103,59 @@ public class Node implements Locatable {
 		return new StringBuilder().append("Node(").append(getX()).append(",").append(getY()).append(")").toString();
 	}
 	
+	/**
+	 * A double precision class based wrapper for the Locatable interface.
+	 * @author Odell
+	 */
 	public static class Double implements Locatable.Double {
 		
 		protected double x, y;
 		
+		/**
+		 * Creates a new Node object with the given x,y coordinates.
+		 * @param x
+		 * 		the X position of this Node.
+		 * @param y
+		 * 		the Y position of this Node.
+		 */
 		public Double(final double x, final double y) {
 			this.x = x;
 			this.y = y;
 		}
 		
+		/**
+		 * Creates a new Node object by cloning the given Locatable.Double.
+		 * @param loc
+		 * 		the Locatable.Double to use to create this Node.
+		 */
 		public Double(final Locatable.Double loc) {
 			this(loc.getX(), loc.getY());
 		}
 		
+		/**
+		 * Modifies the internal x,y positions of this Node.
+		 * @param x
+		 * 		the value to shift the X position of this Node.
+		 * @param y
+		 * 		the value to shift the Y position of this Node.
+		 * @return this Node.
+		 */
 		public Double shift(final double x, final double y) {
 			this.x += x;
 			this.y += y;
 			return this;
 		}
 		
+		/**
+		 * Creates a copy of this Node shifted by the given values.
+		 * @param x
+		 * 		the value to shift the X position of this Node.
+		 * @param y
+		 * 		the value to shift the Y position of this Node.
+		 * @return a copy of this Node shifted.
+		 */
 		public Double derive(final double x, final double y) {
-			return new Double(getX() + x, getY() + y);
+			return clone().shift(x, y);
 		}
 		
 		@Override
@@ -94,10 +168,20 @@ public class Node implements Locatable {
 			return y;
 		}
 		
+		/**
+		 * Sets the X position of this Node.
+		 * @param x
+		 * 		the new X position of this Node.
+		 */
 		public void setX(final double x) {
 			this.x = x;
 		}
 		
+		/**
+		 * Sets the Y position of this Node.
+		 * @param y
+		 * 		the new Y position of this Node.
+		 */
 		public void setY(final double y) {
 			this.y = y;
 		}

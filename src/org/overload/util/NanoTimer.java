@@ -1,8 +1,7 @@
 package org.overload.util;
 
 /**
- * A high precision timer class.<br>
- * 
+ * A high precision timer class.
  * @author Odell
  */
 public class NanoTimer {
@@ -12,11 +11,15 @@ public class NanoTimer {
 	private NanoTimer() {
 		reset();
 	}
+	
 	private NanoTimer(final long elapseTarget) {
 		target = elapseTarget;
 		reset();
 	}
 	
+	/**
+	 * @return whether this timer is active.
+	 */
 	public boolean isActive() {
 		return !isPaused() && (target == null || getElapsedNanos() < target);
 	}

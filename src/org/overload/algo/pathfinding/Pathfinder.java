@@ -11,8 +11,16 @@ import org.overload.algo.Flags;
 import org.overload.loc.Locatable;
 import org.overload.loc.PLocatable;
 
+/**
+ * 2D raster-based pathfinding algorithm collection.
+ * @author Odell
+ */
 public class Pathfinder {
 	
+	/**
+	 * Algorithm set for this raster-based pathfinding collection.
+	 * @author Odell
+	 */
 	public enum Algorithm {
 		
 		ASTAR_4,
@@ -20,6 +28,9 @@ public class Pathfinder {
 		//DIJKSTRA_4, 
 		//DIJKSTRA_8;
 		
+		/**
+		 * @return a simple description of this algorithm.
+		 */
 		public String getDescription() {
 			return toString();
 		}
@@ -56,6 +67,11 @@ public class Pathfinder {
 	
 	private Flags<PLocatable> flags = null;
 	
+	/**
+	 * Creates a pathfinding provider given an algorithm type.
+	 * @param alg
+	 * 		the algorithm implementation to use.
+	 */
 	public Pathfinder(final Algorithm alg) {
 		this.algorithm = alg;
 		switch (algorithm) {
@@ -78,19 +94,42 @@ public class Pathfinder {
 		}
 	}
 	
+	/**
+	 * Creates a pathfinding provider given an algorithm type and collision flags.
+	 * @param alg
+	 * 		the algorithm implementation to use.
+	 * @param flags
+	 * 		the collision flags for hit detection.
+	 */
 	public Pathfinder(final Algorithm alg, final Flags<PLocatable> flags) {
 		this(alg);
 		setFlags(flags);
 	}
 	
+	/**
+	 * @return the algorithm of this pathfinding.
+	 */
 	public final Algorithm getAlgorithm() {
 		return algorithm;
 	}
 	
+	/**
+	 * Assigns the collision flags of this flood fill.
+	 * @param flags
+	 * 		the collision flags for the algorithm implementation.
+	 */
 	public final void setFlags(final Flags<PLocatable> flags) {
 		this.flags = flags;
 	}
 	
+	/**
+	 * Finds a path from the start to the end.
+	 * @param start
+	 * 		the starting location.
+	 * @param end
+	 * 		the destination location.
+	 * @return a valid path to the destination, otherwise null if there was no path.
+	 */
 	public synchronized LinkedList<Locatable> findPath(final Locatable start, final Locatable end) {
 		return def.findPath(flags, start, end);
 	}

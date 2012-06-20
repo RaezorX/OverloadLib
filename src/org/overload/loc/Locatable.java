@@ -7,12 +7,12 @@ package org.overload.loc;
 public interface Locatable {
 	
 	/**
-	 * @return the X value of this Locatable.
+	 * @return the X position of this Locatable.
 	 */
 	public int getX();
 	
 	/**
-	 * @return the Y value of this Locatable.
+	 * @return the Y position of this Locatable.
 	 */
 	public int getY();
 	

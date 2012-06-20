@@ -9,11 +9,27 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+/**
+ * A high performance screen capture utility.
+ * @author Odell
+ */
 public class ScreenCapture {
 	
+	/**
+	 * The size of the default display.
+	 */
 	public final static Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	/**
+	 * The size of the default display as a Rectangle.
+	 */
 	public final static Rectangle SCREEN_RECT = new Rectangle(SCREEN_SIZE);
+	
+	/**
+	 * The screen resolution in dots-per-inch.
+	 */
 	public final static int SCREEN_RESOLUTION = Toolkit.getDefaultToolkit().getScreenResolution();
+	
 	private static long threadCount = 0;
 	
 	private final Robot r;
@@ -21,11 +37,20 @@ public class ScreenCapture {
 	private CaptureThread ct = null;
 	private Object threadObj = new Object();
 	
+	/**
+	 * Creates a new ScreenCapture object.
+	 * @throws AWTException
+	 */
 	public ScreenCapture() throws AWTException {
 		r = new Robot();
 		listeners = new CopyOnWriteArraySet<CaptureListener>();
 	}
 	
+	/**
+	 * Adds a capture listener to listen for new captured images.
+	 * @param cl
+	 * 		the capture listener to add.
+	 */
 	public void addCaptureListener(final CaptureListener cl) {
 		if (listeners.size() == 0 && listeners.add(cl)) {
 			if (ct != null) {
@@ -38,6 +63,11 @@ public class ScreenCapture {
 		}
 	}
 	
+	/**
+	 * Removes a capture listener from this screen capture object.
+	 * @param cl
+	 * 		the capture listener to remove.
+	 */
 	public void removeCaptureListener(final CaptureListener cl) {
 		if (listeners.remove(cl) && listeners.size() == 0)
 			ct.paused = true;

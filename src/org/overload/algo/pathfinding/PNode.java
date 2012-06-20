@@ -15,7 +15,7 @@ import org.overload.loc.PLocatable;
  * Right: x - 1<br>
  * @author Odell
  */
-public abstract class PNode extends Node implements PLocatable {
+abstract class PNode extends Node implements PLocatable {
 	
 	public final static double DIAGONAL = Math.sqrt(2.0D), STRAIGHT = 1.0D;
 	
