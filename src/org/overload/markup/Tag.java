@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * A custom made XML-like markup tag.<br>
- * Format: <name key="value" key="value">post
+ * Format: {@code <name key="value" key="value">post }
  * @author Odell
  */
 public class Tag {
