@@ -153,7 +153,7 @@ public class Tag {
 	}
 	
 	/**
-	 * Creates a Tag object with the raw text from {@link #constructString(Type, String...)}.</br>
+	 * Creates a Tag object with the raw text from {@link #constructString(Object, Object...)}.</br>
 	 * If the length of the tags aren't even, then the last element is appended as post data.
 	 * @param type - the type of the Tag.
 	 * @param tags - tag data in the form of { "key", "value", "key", "value" }.
