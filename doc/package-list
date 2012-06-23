@@ -2,5 +2,7 @@ org.overload.algo
 org.overload.algo.floodfill
 org.overload.algo.pathfinding
 org.overload.loc
+org.overload.markup
 org.overload.media.screen
+org.overload.text
 org.overload.util
