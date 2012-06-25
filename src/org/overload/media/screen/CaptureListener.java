@@ -15,4 +15,6 @@ public interface CaptureListener {
 	 */
 	public void captureReceived(final BufferedImage buffImg);
 	
+	// TODO: add requested capture size method
+	
 }

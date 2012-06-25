@@ -167,10 +167,12 @@ public class Pathfinder {
 		}
 		
 		private ANode retrieveInstance(final PriorityQueue<ANode> pq, final ANode node) {
+			if (node == null)
+				return null;
 			final Iterator<ANode> nI = pq.iterator();
 			while (nI.hasNext()) {
 				final ANode n = nI.next();
-				if (n != null && n.equals(node))
+				if (node.equals(n))
 					return n;
 			}
 			return null;

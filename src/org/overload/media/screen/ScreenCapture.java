@@ -47,6 +47,24 @@ public class ScreenCapture {
 	}
 	
 	/**
+	 * Creates a capture of the entire screen.
+	 * @return a buffered image rendering of the screen.
+	 */
+	public BufferedImage createCapture() {
+		return createCapture(SCREEN_RECT);
+	}
+	
+	/**
+	 * Creates a capture of the screen in the given rectangle.
+	 * @param rect
+	 * 		the rectangle marking the part of the screen to capture.
+	 * @return a buffered image rendering of the screen.
+	 */
+	public BufferedImage createCapture(final Rectangle rect) {
+		return r.createScreenCapture(rect);
+	}
+	
+	/**
 	 * Adds a capture listener to listen for new captured images.
 	 * @param cl
 	 * 		the capture listener to add.
@@ -73,6 +91,8 @@ public class ScreenCapture {
 			ct.paused = true;
 	}
 	
+	// TODO: make the capture thread pay attention to requested capture sizes to improve capture time
+	
 	private class CaptureThread extends Thread {
 		
 		private final ThreadGroup listenerGroup;
@@ -94,7 +114,7 @@ public class ScreenCapture {
 						threadObj.wait();
 					}
 					
-					final BufferedImage bi = r.createScreenCapture(SCREEN_RECT);
+					final BufferedImage bi = createCapture();
 					final Iterator<CaptureListener> temp = listeners.iterator();
 					int i = 0;
 					while (temp.hasNext()) {
