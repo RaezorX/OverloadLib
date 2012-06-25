@@ -87,11 +87,11 @@ public class ScreenCapture {
 	 * 		the capture listener to remove.
 	 */
 	public void removeCaptureListener(final CaptureListener cl) {
+		if (listeners.size() == 0)
+			return;
 		if (listeners.remove(cl) && listeners.size() == 0)
 			ct.paused = true;
 	}
-	
-	// TODO: make the capture thread pay attention to requested capture sizes to improve capture time
 	
 	private class CaptureThread extends Thread {
 		
@@ -113,15 +113,28 @@ public class ScreenCapture {
 						paused = false;
 						threadObj.wait();
 					}
+					// find rectangle to capture
+					final Iterator<CaptureListener> rTemp = listeners.iterator();
+					int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;
+					while (rTemp.hasNext()) {
+						final CaptureListener tempCL = rTemp.next();
+						final Rectangle tempRect = tempCL.captureSize();
+						minX = Math.min(minX, tempRect.x);
+						minY = Math.min(minY, tempRect.y);
+						maxX = Math.max(maxX, tempRect.width + minX);
+						maxY = Math.max(maxY, tempRect.height + minY);
+					}
+					final Rectangle minRect = new Rectangle(minX, minY, maxX - minX, maxY - minY);
 					
-					final BufferedImage bi = createCapture();
+					final BufferedImage bi = createCapture(minRect);
 					final Iterator<CaptureListener> temp = listeners.iterator();
 					int i = 0;
 					while (temp.hasNext()) {
 						final CaptureListener tempCL = temp.next();
 						new Thread(listenerGroup, new Runnable() {
 							public void run() {
-								tempCL.captureReceived(bi);
+								final Rectangle targetSize = tempCL.captureSize();
+								tempCL.captureReceived(bi.getSubimage(targetSize.x - minRect.x, targetSize.y - minRect.y, targetSize.width, targetSize.height));
 							}
 						}, listenerGroup.getName() + "_T" + i++).start();
 					}

@@ -1,5 +1,6 @@
 package org.overload.media.screen;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -15,6 +16,10 @@ public interface CaptureListener {
 	 */
 	public void captureReceived(final BufferedImage buffImg);
 	
-	// TODO: add requested capture size method
+	/**
+	 * Informs the ScreenCapture what section of the screen it should provide this CaptureListener.
+	 * @return a rectangle that specifies the section of the screen to capture.
+	 */
+	public Rectangle captureSize();
 	
 }
