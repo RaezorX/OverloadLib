@@ -1,4 +1,4 @@
-package org.overload.ui;
+package org.overload.ui.title;
 
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
