@@ -16,5 +16,5 @@ public interface ObjectProcessor<I,O> {
 	 * 		the input to process.
 	 * @return output from processed input.
 	 */
-	public O process(I... input);
+	public O process(I input);
 }
