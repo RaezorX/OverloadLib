@@ -11,7 +11,7 @@ import javax.swing.Timer;
  * Temporary titles with timeouts.
  * @author Odell
  */
-public class DialogTitleManager {
+public abstract class DialogTitleManager {
 	
 	private final Dialog dialog;
 	private String defaultTitle;
@@ -132,6 +132,6 @@ public class DialogTitleManager {
 	 * @param title
 	 * 		the new title of the controlled dialog.
 	 */
-	public void onTitleChanged(final String title) {}
+	public abstract void onTitleChanged(final String title);
 	
 }

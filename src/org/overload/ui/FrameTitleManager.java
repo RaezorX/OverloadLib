@@ -11,7 +11,7 @@ import javax.swing.Timer;
  * Temporary titles with timeouts.
  * @author Odell
  */
-public class FrameTitleManager {
+public abstract class FrameTitleManager {
 	
 	private final Frame frame;
 	private String defaultTitle;
@@ -132,6 +132,6 @@ public class FrameTitleManager {
 	 * @param title
 	 * 		the new title of the controlled frame.
 	 */
-	public void onTitleChanged(final String title) {}
+	public abstract void onTitleChanged(final String title);
 	
 }
