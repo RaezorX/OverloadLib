@@ -55,7 +55,7 @@ public abstract class DialogTitleManager {
 	 */
 	public final void setDefaultTitle(final String defaultTitle, final boolean modify) {
 		this.defaultTitle = defaultTitle;
-		if (modify && !timer.isRunning())
+		if (modify && (timer == null || !timer.isRunning()))
 			reset();
 	}
 	
