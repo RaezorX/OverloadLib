@@ -124,6 +124,12 @@ public class Tag {
 		}
 	}
 	
+	/**
+	 * Parses a new Tag from the given data.
+	 * @param data
+	 * 		the data to parse.
+	 * @return a new parsed Tag object.
+	 */
 	public static Tag parse(final String data) {
 		return new Tag(data).parse();
 	}
