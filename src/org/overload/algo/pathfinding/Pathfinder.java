@@ -25,8 +25,6 @@ public class Pathfinder {
 		
 		ASTAR_4,
 		ASTAR_8;
-		//DIJKSTRA_4, 
-		//DIJKSTRA_8;
 		
 		/**
 		 * @return a simple description of this algorithm.
@@ -41,12 +39,6 @@ public class Pathfinder {
 					return "4-way AStar";
 				case ASTAR_8:
 					return "8-way AStar";
-					/*
-				case DIJKSTRA_4:
-					return "4-way Dijkstra";
-				case DIJKSTRA_8:
-					return "8-way Dijkstra";
-					*/
 				default:
 					return null;
 			}
@@ -81,14 +73,6 @@ public class Pathfinder {
 			case ASTAR_8:
 				this.def = new AStarAlgorithm(true);
 				break;
-				/*
-			case DIJKSTRA_4:
-				this.def = new DijkstraAlgorithm(false);
-				break;
-			case DIJKSTRA_8:
-				this.def = new DijkstraAlgorithm(true);
-				break;
-				*/
 			default:
 				this.def = null;
 		}
@@ -288,11 +272,7 @@ public class Pathfinder {
 			
 			protected double getH() {
 				if (h == null) {
-					if (eight) {
-						h = Heuristics.diagonal(this, dest);
-					} else {
-						h = Heuristics.manhattan(this, dest);
-					}
+					h = eight ? Heuristics.diagonal(this, dest) : Heuristics.manhattan(this, dest);
 					if (DEBUG > 1) {
 						System.out.println(toString());
 						System.out.println("F: " + getF() + ", G: " + getG() + ", H: " + h);
@@ -320,44 +300,6 @@ public class Pathfinder {
 		}
 		
 	}
-	/*
-	private class DijkstraAlgorithm implements AlgorithmDef {
-		
-		private final boolean eight;
-		
-		public DijkstraAlgorithm(boolean eight) {
-			this.eight = eight;
-		}
-
-		@Override
-		public LinkedList<Locatable> findPath(final Flags flags, final Locatable start, final Locatable end) {
-			return null;
-		}
-		
-		private class DNode extends Node {
-			
-			public DNode(final int x, final int y) {
-				super(x, y);
-			}
-			
-			public DNode(final Node n) {
-				this(n.x, n.y);
-			}
-
-			@Override
-			protected Node[] getAdjacents(boolean eight) {
-				return eight ? new DNode[] {
-					new DNode(x, y - 1), new DNode(x + 1, y - 1), new DNode(x + 1, y), new DNode(x + 1, y + 1),
-					new DNode(x, y + 1), new DNode(x - 1, y + 1), new DNode(x - 1, y), new DNode(x - 1, y - 1)
-				} : new DNode[] {
-					new DNode(x, y - 1), new DNode(x + 1, y), new DNode(x, y + 1), new DNode(x - 1, y)
-				};
-			}
-			
-		}
-		
-	}
-	*/
 	
 	static class Heuristics {
 		

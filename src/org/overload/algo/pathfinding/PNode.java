@@ -15,7 +15,7 @@ import org.overload.loc.PLocatable;
  * Right: x - 1<br>
  * @author Odell
  */
-abstract class PNode extends Node implements PLocatable {
+abstract class PNode extends Node implements PLocatable, Comparable<PNode> {
 	
 	public final static double DIAGONAL = Math.sqrt(2.0D), STRAIGHT = 1.0D;
 	
@@ -47,6 +47,13 @@ abstract class PNode extends Node implements PLocatable {
 			}
 		}
 		return open.toArray(new PNode[open.size()]);
+	}
+	
+	@Override
+	public int compareTo(PNode pn) {
+		if (getY() != pn.getY())
+			return getY() - pn.getY();
+		return getX() - pn.getX();
 	}
 	
 	/**
