@@ -1,7 +1,5 @@
 package org.overload.matrix;
 
-import java.util.Random;
-
 /**
  * Created by Eclipse IDE.
  * User: Odell

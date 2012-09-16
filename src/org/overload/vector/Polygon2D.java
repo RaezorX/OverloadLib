@@ -138,6 +138,7 @@ public class Polygon2D {
 		final Vector2D[] poly1E = poly1.createEdges(), poly2E = poly2.createEdges();
 		double minIntervalDistance = Double.POSITIVE_INFINITY;
 		Vector2D translationAxis = new Vector2D();
+		@SuppressWarnings("unused")
 		Vector2D edge;
 		
 		for (int edgeIndex = 0; edgeIndex < poly1E.length + poly2E.length; edgeIndex++) {
@@ -157,6 +158,7 @@ public class Polygon2D {
 		return cr;
 	}
 	
+	@SuppressWarnings("unused")
 	private static double[] projectPolygon(final Vector2D axis, final Polygon2D poly) {
 		final Point2D[] points = poly.getPoints();
 		if (points.length <= 0)
@@ -175,6 +177,7 @@ public class Polygon2D {
 		return new double[] { min, max };
 	}
 	
+	@SuppressWarnings("unused")
 	private static double getIntervalDistance(double min1, double max1, double min2, double max2) {
 		return min1 < min2 ? min2 - max1 : min1 - max2;
 	}
