@@ -105,10 +105,8 @@ class JPSImpl implements AlgorithmDefinition {
 	
 	/**
 	 * Finds the next jump node.
-	 * @param x current node X
-	 * @param y current node Y
-	 * @param px parent node X
-	 * @param py parent node Y
+	 * @param node the current node
+	 * @param parent the parent node of the current node
 	 * @return next jump node
 	 */
 	private JPNode jump(Node node, Node parent) {
@@ -150,6 +148,11 @@ class JPSImpl implements AlgorithmDefinition {
 		return jump(node.derive(dx, dy), node);
 	}
 	
+	/**
+	 * Resolves the target by tracing the parent tree backward to form a complete connected path.
+	 * @param target the target to resolve a path
+	 * @return a path from the start to the given target node (usually the end)
+	 */
 	private List<Locatable> resolve(JPNode target) {
 		if (target == null)
 			return null;
