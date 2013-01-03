@@ -73,15 +73,11 @@ class JPSImpl implements AlgorithmDefinition {
 					if (curr.equals(dest))
 						return resolve(curr);
 					closed.add(curr);
-					//System.out.println("Open: " + curr);
 					for (final JPNode neighbor : curr.getNeighbors(true)) {
-						//System.out.println("Neighbor: " + neighbor);
 						JPNode jumpPoint = jump(neighbor, curr);
 						if (jumpPoint != null) {
-							//System.out.println("Jump point: " + jumpPoint);
 							if (closed.contains(jumpPoint))
 								continue;
-							//System.out.println("Added jump point.");
 							if (!open.contains(jumpPoint)) {
 								jumpPoint.setParent(curr);
 								open.offer(jumpPoint);
@@ -92,7 +88,6 @@ class JPSImpl implements AlgorithmDefinition {
 							}
 						}
 					}
-					//System.out.println("Close: " + curr);
 				} while ((curr = open.poll()) != null);
 			}
 			return null;
@@ -162,7 +157,7 @@ class JPSImpl implements AlgorithmDefinition {
 		path.addFirst(new Node(target));
 		JPNode parent;
 		while ((parent = target.getParent()) != null) {
-			// FROM TARGET TO PARENT, NOT INCLUDING TARGET
+			// from target to parent, including parent but not the target
 			int x = parent.getX(), y = parent.getY(), px = target.getX(), py = target.getY();
 			int steps = getSteps(x, y, px, py);
 			Node norm = normalizeDirection(x, y, px, py);
