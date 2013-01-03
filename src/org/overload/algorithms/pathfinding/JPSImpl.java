@@ -97,9 +97,6 @@ class JPSImpl implements AlgorithmDefinition {
 			parentMap.clear();
 			curr = null;
 			dest = null;
-			
-			flags = null;
-			heur = null;
 		}
 	}
 	
@@ -300,24 +297,13 @@ class JPSImpl implements AlgorithmDefinition {
 					if (!walkable(temp.set(x, y - dy), this))
 						nodes.add(new JPNode(temp.shift(dx, 0)));
 				} else { // straight direction
-					if (dx == 0) { // moving vertically
-						if (walkable(temp.set(x, y + dy), this)) {
-							nodes.add(new JPNode(temp));
-							// forced neighbor checks
-							if (!walkable(temp.set(x + 1, y), this))
-								nodes.add(new JPNode(temp.shift(0, dy)));
-							if (!walkable(temp.set(x - 1, y), this))
-								nodes.add(new JPNode(temp.shift(0, dy)));
-						}
-					} else { // moving horizontally
-						if (walkable(temp.set(x + dx, y), this)) {
-							nodes.add(new JPNode(temp));
-							// forced neighbor checks
-							if (!walkable(temp.set(x, y + 1), this))
-								nodes.add(new JPNode(temp.shift(dx, 0)));
-							if (!walkable(temp.set(x, y - 1), this))
-								nodes.add(new JPNode(temp.shift(dx, 0)));
-						}
+					if (walkable(temp.set(x + dx, y + dy), this)) {
+						nodes.add(new JPNode(temp));
+						// forced neighbor checks
+						if (!walkable(temp.set(x + dy, y + dx), this))
+							nodes.add(new JPNode(temp.shift(dx, dy)));
+						if (!walkable(temp.set(x - dy, y - dx), this))
+							nodes.add(new JPNode(temp.shift(dx, dy)));
 					}
 				}
 			} else {

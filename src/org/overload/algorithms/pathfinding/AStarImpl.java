@@ -96,9 +96,6 @@ class AStarImpl implements AlgorithmDefinition {
 			parentMap.clear();
 			curr = null;
 			dest = null;
-			
-			flags = null;
-			heur = null;
 		}
 	}
 	
