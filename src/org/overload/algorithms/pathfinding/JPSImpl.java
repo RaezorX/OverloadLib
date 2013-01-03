@@ -300,17 +300,6 @@ class JPSImpl implements AlgorithmDefinition {
 					if (!walkable(temp.set(x, y - dy), this))
 						nodes.add(new JPNode(temp.shift(dx, 0)));
 				} else { // straight direction
-					/*
-					if (walkable(temp.set(x + dx, y + dy), this)) {
-						nodes.add(new JPNode(temp));
-						// forced neighbor checks
-						if (!walkable(temp.set(x + dy, y + dx), this))
-							nodes.add(new JPNode(temp.shift(dx, dy)));
-						if (!walkable(temp.set(x - dy, y - dx), this))
-							nodes.add(new JPNode(temp.shift(dx, dy)));
-					}
-					*/
-					
 					if (dx == 0) { // moving vertically
 						if (walkable(temp.set(x, y + dy), this)) {
 							nodes.add(new JPNode(temp));
