@@ -32,25 +32,29 @@ public class ScreenCapture {
 	
 	private static long threadCount = 0;
 	
-	private final Robot r;
-	private final CopyOnWriteArraySet<CaptureListener> listeners;
+	private static Robot robot;
+	
+	private static Robot getRobot() throws AWTException {
+		if (robot == null) {
+			robot = new Robot();
+		}
+		return robot;
+	}
+	
+	private CopyOnWriteArraySet<CaptureListener> listeners;
 	private CaptureThread ct = null;
 	private Object threadObj = new Object();
 	
 	/**
 	 * Creates a new ScreenCapture object.
-	 * @throws AWTException
 	 */
-	public ScreenCapture() throws AWTException {
-		r = new Robot();
-		listeners = new CopyOnWriteArraySet<CaptureListener>();
-	}
+	public ScreenCapture() {}
 	
 	/**
 	 * Creates a capture of the entire screen.
 	 * @return a buffered image rendering of the screen.
 	 */
-	public BufferedImage createCapture() {
+	public static BufferedImage createCapture() {
 		return createCapture(SCREEN_RECT);
 	}
 	
@@ -60,8 +64,12 @@ public class ScreenCapture {
 	 * 		the rectangle marking the part of the screen to capture.
 	 * @return a buffered image rendering of the screen.
 	 */
-	public BufferedImage createCapture(final Rectangle rect) {
-		return r.createScreenCapture(rect);
+	public static BufferedImage createCapture(final Rectangle rect) {
+		try {
+			return getRobot().createScreenCapture(rect);
+		} catch (AWTException e) {
+			return null;
+		}
 	}
 	
 	/**
@@ -70,6 +78,8 @@ public class ScreenCapture {
 	 * 		the capture listener to add.
 	 */
 	public void addCaptureListener(final CaptureListener cl) {
+		if (listeners == null)
+			listeners = new CopyOnWriteArraySet<CaptureListener>();
 		if (listeners.size() == 0 && listeners.add(cl)) {
 			if (ct != null) {
 				ct.paused = false;
@@ -87,7 +97,7 @@ public class ScreenCapture {
 	 * 		the capture listener to remove.
 	 */
 	public void removeCaptureListener(final CaptureListener cl) {
-		if (listeners.size() == 0)
+		if (listeners == null || listeners.size() == 0)
 			return;
 		if (listeners.remove(cl) && listeners.size() == 0)
 			ct.paused = true;
@@ -96,7 +106,7 @@ public class ScreenCapture {
 	private class CaptureThread extends Thread {
 		
 		private final ThreadGroup listenerGroup;
-		private boolean paused = false;
+		private boolean paused = true;
 		
 		public CaptureThread() {
 			super("ScreenCapture#CaptureThread" + threadCount++);
@@ -113,6 +123,8 @@ public class ScreenCapture {
 						paused = false;
 						threadObj.wait();
 					}
+					if (listeners == null)
+						continue;
 					// find rectangle to capture
 					final Iterator<CaptureListener> rTemp = listeners.iterator();
 					int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;

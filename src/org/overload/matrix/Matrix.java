@@ -1,10 +1,7 @@
 package org.overload.matrix;
 
 /**
- * Created by Eclipse IDE.
- * User: Odell
- * Date: Aug 1, 2012
- * Time: 9:50:58 AM
+ * A simple matrix class which only supported multiplication.
  */
 public class Matrix {
 	
@@ -15,7 +12,7 @@ public class Matrix {
 	}
 
 	/**
-	 * Standard matrix multiplication process. ~ N^3
+	 * Standard matrix multiplication process. ~ O(N^3)
 	 * @param other
 	 * 		the other matrix to multiply.
 	 * @return a new Matrix representing the multiplied matrices.

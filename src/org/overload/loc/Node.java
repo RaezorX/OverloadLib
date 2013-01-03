@@ -70,8 +70,9 @@ public class Node implements Locatable {
 	 * @param x
 	 * 		the new X position of this Node.
 	 */
-	public void setX(final int x) {
+	public Node setX(final int x) {
 		this.x = x;
+		return this;
 	}
 	
 	/**
@@ -79,8 +80,18 @@ public class Node implements Locatable {
 	 * @param y
 	 * 		the new Y position of this Node.
 	 */
-	public void setY(final int y) {
+	public Node setY(final int y) {
 		this.y = y;
+		return this;
+	}
+	
+	/**
+	 * Sets both coordinates of this Node.
+	 * @param x the new X position of this Node.
+	 * @param y the new Y position of this Node.
+	 */
+	public Node set(final int x, final int y) {
+		return setX(x).setY(y);
 	}
 	
 	@Override
@@ -90,12 +101,16 @@ public class Node implements Locatable {
 	
 	@Override
 	public boolean equals(Object o) {
-		return o != null && o instanceof Locatable && ((Locatable) o).getX() == getX() && ((Locatable) o).getY() == getY();
+		return o != null && o instanceof Locatable && 
+				((Locatable) o).getX() == getX() && ((Locatable) o).getY() == getY();
 	}
 	
 	@Override
 	public int hashCode() {
-		return x * 31 + y;
+		int hash = 373;
+		hash = 31 * hash + x;
+		hash = 31 * hash + y;
+		return hash;
 	}
 	
 	@Override
@@ -198,7 +213,10 @@ public class Node implements Locatable {
 		
 		@Override
 		public int hashCode() {
-			return (int)(x * 31.0D + y);
+			double hash = 373.0D;
+			hash = 31.0D * hash + x;
+			hash = 31.0D * hash + y;
+			return (int) hash;
 		}
 		
 		@Override

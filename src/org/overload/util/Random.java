@@ -20,8 +20,7 @@ public class Random {
 	
 	/**
 	 * Generates a random number between 0 and the given max (inclusive).
-	 * @param max
-	 * 		the inclusive, maximum limit.
+	 * @param max the inclusive, maximum limit.
 	 * @return a random number between 0 and the given max (inclusive).
 	 */
 	public static int nextIInt(int max) {

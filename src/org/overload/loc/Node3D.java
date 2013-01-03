@@ -124,7 +124,11 @@ public class Node3D implements Locatable3D {
 	
 	@Override
 	public int hashCode() {
-		return (x * 31 + y) * z;
+		int hash = 373;
+		hash = 31 * hash + x;
+		hash = 31 * hash + y;
+		hash = 31 * hash + z;
+		return hash;
 	}
 	
 	@Override
@@ -259,7 +263,11 @@ public class Node3D implements Locatable3D {
 		
 		@Override
 		public int hashCode() {
-			return (int)((x * 31 + y) * z);
+			double hash = 373.0D;
+			hash = 31.0D * hash + x;
+			hash = 31.0D * hash + y;
+			hash = 31.0D * hash + z;
+			return (int) hash;
 		}
 		
 		@Override
