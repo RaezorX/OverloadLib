@@ -31,7 +31,7 @@ class JPSImpl implements AlgorithmDefinition {
 	
 	private Heuristic heur;
 	private Flags flags;
-	private double diagonal;
+	private double diagonal = 1.0D;
 	
 	JPSImpl() {
 		open = new PriorityQueue<JPNode>(10, new DoubleComparator<JPNode>() {

@@ -31,7 +31,7 @@ class AStarImpl implements AlgorithmDefinition {
 	private Flags flags;
 	private Heuristic heur;
 	private boolean eight;
-	private double diagonal;
+	private double diagonal = 1.0D;
 	
 	AStarImpl() {
 		open = new PriorityQueue<ANode>(10, new DoubleComparator<ANode>() {
