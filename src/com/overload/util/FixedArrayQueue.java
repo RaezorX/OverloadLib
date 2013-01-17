@@ -31,7 +31,7 @@ public class FixedArrayQueue<E> {
 	 * @return if the queue is full, the element at the head will be removed and returned, otherwise null.
 	 */
 	public E add(final E element) {
-		return insert(getCount(), element);
+		return insert(count(), element);
 	}
 	
 	/**
@@ -51,15 +51,15 @@ public class FixedArrayQueue<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public E get(int index) {
-		if (index < 0 || index >= getCount())
-			throw new IndexOutOfBoundsException("The index given (" + index + ") was out of bounds: [0 to " + (getCount() - 1) + "]");
+		if (index < 0 || index >= count())
+			throw new IndexOutOfBoundsException("The index given (" + index + ") was out of bounds: [0 to " + (count() - 1) + "]");
 		return (E) data[index];
 	}
 	
 	/**
 	 * @return how many elements are currently in this queue.
 	 */
-	public int getCount() {
+	public int count() {
 		return count;
 	}
 	
@@ -68,7 +68,7 @@ public class FixedArrayQueue<E> {
 	 * @return <tt>true</tt> if the queue is full, <tt>false</tt> if it's not.
 	 */
 	public boolean isFull() {
-		return getCount() >= size();
+		return count() >= size();
 	}
 	
 	/**
@@ -123,13 +123,13 @@ public class FixedArrayQueue<E> {
 	 * @return the removed element.
 	 */
 	public E remove(int index) {
-		return remove(index, getCount() - 1);
+		return remove(index, count() - 1);
 	}
 	
 	private E remove(int index, final int shiftIndex) {
 		final E temp = get(index);
 		data[index] = null;
-		int max = Math.min(shiftIndex, getCount() - 1);
+		int max = Math.min(shiftIndex, count() - 1);
 		while (index < max) {
 			data[index] = data[++index];
 			data[index] = null;
@@ -148,16 +148,9 @@ public class FixedArrayQueue<E> {
 	public E remove(E element) {
 		for (int i = 0; i < size(); i++) {
 			final E temp = get(i);
-			if (element == null) {
-				if (temp == null) {
-					remove(i);
-					return temp;
-				}
-			} else {
-				if (element.equals(temp)) {
-					remove(i);
-					return temp;
-				}
+			if (element == null ? temp == null : element.equals(temp)) {
+				remove(i);
+				return temp;
 			}
 		}
 		return null;
@@ -173,9 +166,9 @@ public class FixedArrayQueue<E> {
 	@Override
 	public String toString() {
 		final StringBuilder build = new StringBuilder().append("[");
-		for (int i = 0; i < getCount(); i++) {
+		for (int i = 0, c = count(); i < c; i++) {
 			build.append(data[i].toString());
-			if (i + 1 < getCount()) {
+			if (i + 1 < c) {
 				build.append(",");
 			}
 		}
