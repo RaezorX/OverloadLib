@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import com.overload.algorithms.pathfinding.Pathfinder.Flags;
-import com.overload.algorithms.pathfinding.Pathfinder.Heuristic;
+import com.overload.algorithms.pathfinding.Pathfinding.Flags;
+import com.overload.algorithms.pathfinding.Pathfinding.Heuristic;
 import com.overload.impl.DoubleComparator;
 import com.overload.loc.Locatable;
 import com.overload.loc.Node;

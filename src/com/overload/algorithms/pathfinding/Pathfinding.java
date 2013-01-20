@@ -9,19 +9,19 @@ import com.overload.loc.Locatable;
  * This pathfinding class is NOT thread-safe.
  * @author Odell
  */
-public class Pathfinder implements AlgorithmSettings {
+public class Pathfinding implements AlgorithmSettings {
 	
 	protected final Algorithm algorithm;
 	protected final AlgorithmDefinition definition;
 	
 	/**
-	 * Creates a pathfinder given an algorithm type and flags.
+	 * Creates a pathfinding provider given an algorithm type and flags.
 	 * @param alg the algorithm implementation to use.
 	 * @param eight whether the algorithm should search in eight or four directions.
 	 * @param flags the collision flags.
 	 * @param heur the heuristic used by the algorithm implementation, null allows the algorithm to choose.
 	 */
-	public Pathfinder(final Algorithm alg, final Flags flags) {
+	public Pathfinding(final Algorithm alg, final Flags flags) {
 		if (alg == null)
 			throw new IllegalArgumentException("algorithm can't be null");
 		this.algorithm = alg;

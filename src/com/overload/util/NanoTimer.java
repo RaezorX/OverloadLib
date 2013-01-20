@@ -70,7 +70,7 @@ public class NanoTimer {
 	 * @return elapsed milliseconds in double precision.
 	 */
 	public double getElapsedMillis() {
-		return ((double) getElapsedNanos()) / 1000000.D;
+		return ((double) getElapsedNanos()) / 1000000.0D;
 	}
 	
 	/**

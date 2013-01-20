@@ -1,7 +1,7 @@
 package com.overload.algorithms.pathfinding;
 
-import com.overload.algorithms.pathfinding.Pathfinder.Flags;
-import com.overload.algorithms.pathfinding.Pathfinder.Heuristic;
+import com.overload.algorithms.pathfinding.Pathfinding.Flags;
+import com.overload.algorithms.pathfinding.Pathfinding.Heuristic;
 
 /**
  * Defines set methods for algorithm definitions.
