@@ -7,19 +7,23 @@ package com.overload.algorithms.sort;
 class RadixSort implements AlgorithmDefinition {
 	
 	@Override
-	public int[] sort(int[] input) {
-		int[] temp1 = input;
-		int[] temp2 = new int[input.length];
-		final int bitlength = 8;
-		final int radix = 1 << bitlength;
-		final int mask = radix - 1;
+	public int[] sort(final int[] arr) {
+		int[] input = arr;
+		int[] temp = new int[arr.length];
+		final int[] bitLengths = new int[] { 8, 8, 8, 7, 1 };
 		
-		for (int exp = 0; exp < Integer.SIZE; exp += bitlength) {
+		for (int b = 0, exp = 0; b < bitLengths.length; exp += bitLengths[b], b++) {
+			final int bitlength = bitLengths[b];
+			final int radix = 1 << bitlength;
+			final int mask = radix - 1;
 			// stores just the count of items in the buckets
-			int[] buckets = new int[radix];
+			final int[] buckets = new int[radix];
 			// count how many items go in each bucket
-			for (int i = temp1.length - 1; i >= 0; i--) {
-				buckets[(temp1[i] >>> exp) & mask]++;
+			for (int i = input.length - 1; i >= 0; i--) {
+				int bIndex = input[i] >>> exp & mask;
+				if (bitlength == 1) // takes care of signed integers
+					bIndex ^= mask;
+				buckets[bIndex]++;
 			}
 			// for each bucket, calculate what index immediately follows
 			// where it's items are to be copied to the temp array
@@ -27,25 +31,28 @@ class RadixSort implements AlgorithmDefinition {
 				buckets[i] += buckets[i - 1];
 			}
 			// using each bucket, distribute the input items into the temp array
-			for (int i = temp1.length - 1; i >= 0; i--) {
-				temp2[--buckets[(temp1[i] >>> exp) & mask]] = temp1[i];
+			for (int i = input.length - 1; i >= 0; i--) {
+				int bIndex = input[i] >>> exp & mask;
+				if (bitlength == 1) // takes care of signed integers
+					bIndex ^= mask;
+				temp[--buckets[bIndex]] = input[i];
 			}
-			// swap the output arrays
-			int[] swap = temp1;
-			temp1 = temp2;
-			temp2 = swap;
+			// swap the arrays
+			final int[] swap = input;
+			input = temp;
+			temp = swap;
 		}
 		// ensures the input array contains the sorted data
-		if (input == temp2) {
-			System.arraycopy(temp1, 0, input, 0, temp1.length);
+		if (arr == temp) {
+			System.arraycopy(temp, 0, arr, 0, temp.length);
 		}
-		return input;
+		return arr;
 	}
 	
 	/*
 	public static void main(String[] args) {
-		int size = 10000000;
-		final int[] rand = Random.nextInts(size, size);
+		int size = 1000000;
+		final int[] rand = Random.nextInts(size, -size, size);
 		
 		BenchmarkTask radixTask = new BenchmarkTask() {
 
