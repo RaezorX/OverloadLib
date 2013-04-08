@@ -79,10 +79,11 @@ public class FixedArrayQueue<E> {
 	 * 		the element to insert.
 	 * @return if the queue is full, the element at the head will be removed and returned, otherwise null.
 	 */
-	public E insert(final int index, final E element) {
+	public E insert(int index, final E element) {
 		E temp = null;
 		if (isFull()) {
 			temp = remove(0, index);
+			index--;
 		} else {
 			int i = count;
 			while (i > index)
